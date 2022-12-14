@@ -9,9 +9,9 @@ Mentions
 List
 ====
 
-Required permission: ``ticket.agent`` **or** ``ticket.customer``
+Required permission: ``ticket.agent`` with ``read`` access to the ticket. The only valid ``type`` so far is ``Ticket``.
 
-``GET``-Request sent: ``/api/v1/mentions``
+``GET``-Request sent: ``/api/v1/mentions?mentionable_type={type} &mentionable_id={id}``
 
 .. code-block:: json
    :force:
@@ -43,10 +43,12 @@ Required permission: ``ticket.agent`` **or** ``ticket.customer``
      ]
    }
 
+It will list users mentioned in the ticket.
+
 Create
 ======
 
-Required permission: ``ticket.agent``
+Required permission: ``ticket.agent`` with ``read`` access to the ticket. The only valid ``type`` so far is ``Ticket``.
 
 ``POST``-Request sent: ``/api/v1/mentions``
 
@@ -80,7 +82,7 @@ The mention will be created for the user of the current session.
 Delete
 ======
 
-Required permission: ``ticket.agent``
+Required: ``Mention`` user has to match the user of the current session.
 
 ``DELETE``-Request sent: ``/api/v1/mentions/{id}``
 
@@ -101,3 +103,5 @@ Response:
      "created_at":"2021-03-16T08:51:08.985Z",
      "updated_at":"2021-03-16T08:51:08.985Z"
    }
+
+The given mention will be deleted
